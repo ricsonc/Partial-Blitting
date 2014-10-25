@@ -1,9 +1,3 @@
-'''
-Created on Sep 13, 2014
-
-@author: nlt2
-'''
-
 import pygame as pg
 import os
 from Tkinter import *
