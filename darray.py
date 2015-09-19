@@ -83,12 +83,3 @@ def replacearr(oarr, narr, xparts, yparts, selectf = selmax, evalf = approxsum):
     rats[2] += four-three
     #print rats
     return [(subarray(narr, *part), part) for part, score in replparts]
-
-#arr1 = np.zeros((1000,2000))
-#arr2 = np.random.randint(0, 256**3-1, size = (1000,2000))
-#cProfile.run('''
-#for x in xrange(100):
-#    parts = replacearr(arr1, arr2, 20, 10)
-#''')
-#
-#print rats
