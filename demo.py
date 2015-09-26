@@ -1,4 +1,4 @@
-import disp2 as display
+import disp as display
 import numpy as np
 from Tkinter import *
 import cProfile
@@ -19,6 +19,7 @@ def drawsquare(xp,yp, col, size = 50):
     display.todisp[xp-size/2:xp+size/2,yp-size/2:yp+size/2] = m
 
 def runloop():
+    print 'started!'
     col = 0
     yp = 1080/2
     xp = 1920/2
@@ -45,13 +46,10 @@ def runloop():
 for x in xrange(3):
     plmt.mt(runloop)
 
-#print 'ig'
-#print 'run'
-
-#######testing
-
-#root.after(0,display._mainloop)
-root.after(0,display.naiveloop)
+if False:
+    root.after(0,display.naiveloop) #this is slow
+else:
+    root.after(0,display._mainloop) #this is fast
 
 root.mainloop()
 
