@@ -8,7 +8,8 @@ import random
 def subarray(arr, minx, maxx, miny, maxy):
     return arr[minx:maxx,miny:maxy]
 
-def partition(num, parts):
+def partition(num, parts): 
+    #returns parts numbers evenly spaced from 0 to num
     avg = float(num)/parts
     partitions = []
     count = 0.0
@@ -18,21 +19,11 @@ def partition(num, parts):
     return partitions+[num]
 
 def getpairs(lst):
+    #iterate by pair
     pairs = []
     for u, v in zip(lst[:-1], lst[1:]):
         pairs.append((u,v))
     return pairs
-
-def arrayparts_(arr, xparts, yparts, evalf):
-    parts = []
-    xsplit = getpairs(partition(len(arr),xparts))
-    ysplit = getpairs(partition(len(arr[0]), yparts))
-    subarrs = product(xsplit, ysplit)
-    for ((x1, x2), (y1, y2)) in subarrs:
-        subarr = subarray(arr, x1, x2, y1, y2)
-        score = evalf(subarr)
-        parts.append(((x1, x2, y1, y2), score))
-    return parts
 
 def arrayparts(arr, xparts, yparts):
     parts = []
@@ -58,12 +49,6 @@ def approxsum(arr, sponge = 10): #0.67
 def rowsum(arr, sponge = 10): #0.57
     return np.sum(arr[::sponge])
 
-def replacearr_(oarr, narr, xparts, yparts, selectf = selmax, evalf = rowsum):
-    darr = np.absolute(narr-oarr) #ohh
-    parts = arrayparts(darr, xparts, yparts, evalf)
-    replparts = selectf(parts)
-    return [(subarray(narr, *part), part) for part, score in replparts]
-
 rats = [0, 0, 0]
 def replacearr(oarr, narr, xparts, yparts, selectf = selmax, evalf = approxsum):
     global rats
@@ -78,8 +63,9 @@ def replacearr(oarr, narr, xparts, yparts, selectf = selmax, evalf = approxsum):
     three = time.time()
     replparts = selectf(parts)
     four = time.time()
+    
+    #benchmarking purposes
     rats[0] += two-one
     rats[1] += three-two
     rats[2] += four-three
-    #print rats
     return [(subarray(narr, *part), part) for part, score in replparts]
